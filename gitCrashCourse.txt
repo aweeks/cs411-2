@@ -1,0 +1,57 @@
+-> git config --global user.name "Kevin McIntosh"
+	
+	Explanation
+	---
+	config				Anything related to the current repository
+	--global			Do this to everything
+	user.name			Go to the user name key
+	"Kevin McIntosh"	Modify the key with this user name
+	
+-> git clone <url>
+	
+	Explination
+	---
+	Create a local copy of a remote repository	
+	(In terms of proj2, cs411: git@github.com:aweeks/cs411-w)
+	
+-> git add <file>
+
+	Explination
+	---
+	Add a new file or directory
+	Ex: git add ./
+	Don't need to readd if you have already modified it
+	
+-> git commit -m "<message>"
+
+	Explination
+	---
+	Commit to your local drive
+	Does not commit to the server
+	
+-> git push
+
+	Explination
+	---
+	Push revisions to the remote server
+	Won't work if there are conflicts
+	
+-> git pull
+
+	Explination
+	---
+	Get most recent revisions from the server
+
+-> git fetch && get rebase remotes/origin/master 
+
+	Explination
+	---
+	Use when there is a conflict.
+	999/1000 (so saith alex) it works
+	Follow by calling "git push"
+
+-> git fetch
+
+	Explinations
+	---
+	Get remote revisions and don not apply
