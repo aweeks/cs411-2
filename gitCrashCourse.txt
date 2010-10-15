@@ -55,3 +55,8 @@
 	Explinations
 	---
 	Get remote revisions and don not apply
+
+-> git log
+        Explanation
+        ---
+        View the commit log.
