@@ -18,8 +18,7 @@ struct thread_info;
  * implement any type of scheduler that you want.
  */
 
-struct sched_array {
-};
+struct sched_array;
 
 /* ---------------- Do NOT Touch -------------- */
 /* Sleep Types */
@@ -88,7 +87,6 @@ unsigned long long sched_clock();
 
 /*------------------YOU MAY EDIT BELOW THIS LINE---------------------*/
 /*------------------- User Defined Functions -------------------------*/
-void __add_task(struct sched_array list, struct task_struct *task);
 /*-------------These functions MUST be defined for the VM-------------*/
 void initschedule(struct runqueue *newrq, struct task_struct *seedTask);
 void killschedule();
