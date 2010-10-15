@@ -66,6 +66,22 @@ void schedule()
 {
 }
 
+void __add_task(struct sched_array list, struct task_struct *task)
+{
+	struct sched_array newElement;
+	INIT_LIST_HEAD(&(newElement.list));
+	newElement.task = *task;
+	struct sched_array *current_item;
+	list_for_each_entry(current_item, &list.list, list)
+	{
+		if (current_item->task.time_slice > task->time_slice)
+		{
+			list_add(newElement.list.prev, &(list.list));
+			break;
+		}
+	}
+
+}
 
 /* enqueue_task
  * Enqeueus a task in the passed sched_array

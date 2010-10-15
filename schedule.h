@@ -5,14 +5,7 @@
 #include "list.h"
 
 struct thread_info;
-
-/* ------------- This is modified by the programmer ------------ */
-/* sched_array is the primary data structure used by the scheduler.
- * We have left it to be modified by you so that you may 
- * implement any type of scheduler that you want.
- */
-struct sched_array {
-};
+struct sched_array;
 
 /* ---------------- Do NOT Touch -------------- */
 /* Sleep Types */
@@ -44,6 +37,16 @@ struct task_struct
 												   have schedule called */
 };
 
+/* ------------- This is modified by the programmer ------------ */
+/* sched_array is the primary data structure used by the scheduler.
+ * We have left it to be modified by you so that you may 
+ * implement any type of scheduler that you want.
+ */
+struct sched_array {
+	struct list_head list;
+	struct task_struct task;
+};
+
 /* runqueue */
 struct runqueue {
     unsigned long    nr_running;				/* number of runnable tasks */
@@ -70,6 +73,7 @@ unsigned long long sched_clock();
 
 /*------------------YOU MAY EDIT BELOW THIS LINE---------------------*/
 /*------------------- User Defined Functions -------------------------*/
+void __add_task(struct sched_array list, struct task_struct *task);
 /*-------------These functions MUST be defined for the VM-------------*/
 void initschedule(struct runqueue *newrq, struct task_struct *seedTask);
 void killschedule();
