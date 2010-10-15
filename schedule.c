@@ -23,6 +23,9 @@ struct task_struct *current;
  *			 There are HZ jiffies in a second, (HZ is 
  *			 declared in macros.h), and is usually
  *			 1 or 10 milliseconds.
+ * 
+ * Singular - jiffy.  A tick is simply and simply represents the min 
+ * amount of time
  */
 extern long long jiffies;
 
@@ -127,6 +130,8 @@ void wake_up_new_task(struct task_struct *p)
 /* __activate_task
  * Activates the task in the scheduler
  * by adding it to the active array.
+ * 
+ * Do bookkeeping here
  */
 void __activate_task(struct task_struct *p)
 {
@@ -137,7 +142,8 @@ void __activate_task(struct task_struct *p)
  * from sleeping.
  */
 void activate_task(struct task_struct *p)
-{		
+{	
+	__activate_task(p);	
 }
 
 /* deactivate_task

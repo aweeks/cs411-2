@@ -4,8 +4,22 @@
 #include "macros.h"
 #include "list.h"
 
+/*
+ * Handled by the processor.  We should not have to impliment it,
+ * but will be useful in debugging.
+ * 
+ * You can find info on it in private_struct.h
+ */ 
 struct thread_info;
-struct sched_array;
+
+/* ------------- This is modified by the programmer ------------ */
+/* sched_array is the primary data structure used by the scheduler.
+ * We have left it to be modified by you so that you may 
+ * implement any type of scheduler that you want.
+ */
+
+struct sched_array {
+};
 
 /* ---------------- Do NOT Touch -------------- */
 /* Sleep Types */
@@ -34,7 +48,8 @@ struct task_struct
 	struct sched_array *array;					/* The sched_array the task is in */
 	enum sleep_type sleep_type;					/* What type of sleep task is in */
 	int need_reschedule;						/* Flag, set if task needs to
-												   have schedule called */
+												   have schedule called
+												   useful in context_switch()*/
 };
 
 /* ------------- This is modified by the programmer ------------ */

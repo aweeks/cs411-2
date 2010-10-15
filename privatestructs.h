@@ -16,7 +16,7 @@
 
 struct thread_info
 {
-	int id;
+	int id; //similar to pid
 	int spawn_time;
 	int kill_time;
 	int niceValue;
