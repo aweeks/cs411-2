@@ -49,8 +49,11 @@ extern long long jiffies;
 void initschedule(struct runqueue *newrq, struct task_struct *seedTask)
 {
     rq = newrq;
+    rq -> active  = (struct sched_array *) malloc( sizeof(struct sched_array) );
+    INIT_LIST_HEAD( &rq->active->list );
 
-	INIT_LIST_HEAD(&(new.list));
+    rq -> expired = (struct sched_array *) malloc( sizeof(struct sched_array) );
+    INIT_LIST_HEAD( &rq->expired->list );
     
     enqueue_task(seedTask, rq->active);
     schedule();
