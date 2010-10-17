@@ -89,7 +89,10 @@ void killschedule()
  */
 void schedule()
 {
-
+	struct task_struct * next_task = rq->active->task;
+	dequeue_task(next_task, NULL);
+	next_task -> need_reschedule = 0;
+	context_switch(next_task);
 }
 
 /* enqueue_task
@@ -126,7 +129,14 @@ void dequeue_task(struct task_struct *p, struct sched_array *array)
  * Sets up schedule info for a newly forked task
  */
 void sched_fork(struct task_struct *p)
-{	
+{
+	// To prevent loss of odd timeslices on fork, add one to child (before bitshift)
+	p->time_slice = ( current->time_slice + 1 ) >> 2;
+	current->time_slice = ( current->time_slice ) >> 2;
+	if ( current->time_slice <= 0 )
+	{
+		current->need_reschedule = 1;
+	}
 }
 
 /* scheduler_tick
@@ -135,6 +145,11 @@ void sched_fork(struct task_struct *p)
  */
 void scheduler_tick(struct task_struct *p)
 {	
+	p->time_slice--;
+	if ( p->time_slice <= 0 )
+	{
+		p->need_reschedule = 1;
+	}
 }
 
 /* wake_up_new_task
