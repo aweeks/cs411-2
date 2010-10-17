@@ -76,7 +76,10 @@ void killschedule()
  */
 void schedule()
 {
-
+	struct task_struct * next_task = rq->active->task;
+	dequeue_task(next_task, NULL);
+	next_task -> need_reschedule = 0;
+	context_switch(next_task);
 }
 
 /* enqueue_task
@@ -113,6 +116,7 @@ void dequeue_task(struct task_struct *p, struct sched_array *array)
  */
 void sched_fork(struct task_struct *p)
 {	
+	
 }
 
 /* scheduler_tick
@@ -121,6 +125,7 @@ void sched_fork(struct task_struct *p)
  */
 void scheduler_tick(struct task_struct *p)
 {	
+	
 }
 
 /* wake_up_new_task
