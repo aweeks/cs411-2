@@ -105,7 +105,7 @@ void enqueue_task(struct task_struct *p, struct sched_array *array)
  */
 void dequeue_task(struct task_struct *p, struct sched_array *array)
 {
-	list_del(p->list);
+	list_del( &(p->run_list) );
 }
 
 /* sched_fork
