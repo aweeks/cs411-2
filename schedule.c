@@ -48,6 +48,12 @@ extern long long jiffies;
   */
 void initschedule(struct runqueue *newrq, struct task_struct *seedTask)
 {
+    rq = newrq;
+
+	INIT_LIST_HEAD(&(new.list));
+    
+    enqueue_task(seedTask, rq->active);
+    schedule();
 }
 
 /* killschedule
@@ -67,6 +73,7 @@ void killschedule()
  */
 void schedule()
 {
+
 }
 
 /* enqueue_task
@@ -74,15 +81,15 @@ void schedule()
  */
 void enqueue_task(struct task_struct *p, struct sched_array *array)
 {
-	struct sched_array newElement;
-	INIT_LIST_HEAD(&(newElement.list));
-	newElement.task = *p;
-	struct sched_array *current_item;
-	list_for_each_entry(current_item, &array->list, list)
+	struct sched_array *new = (struct sched_array *) malloc( sizeof(struct sched_array) );
+    new->task = *p;
+
+	struct sched_array *tmp;
+	list_for_each_entry(tmp, &array, list)
 	{
-		if (current_item->task.time_slice > p->time_slice)
+		if( tmp->task->time_slice > p->time_slice )
 		{
-			list_add(newElement.list.prev, &(array->list));
+			list_add( new , &(tmp->list.prev) );
 			break;
 		}
 	}

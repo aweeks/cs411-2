@@ -58,7 +58,7 @@ struct task_struct
  */
 struct sched_array {
 	struct list_head list;
-	struct task_struct task;
+	struct task_struct *task;
 };
 
 /* runqueue */
