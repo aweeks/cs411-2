@@ -85,14 +85,16 @@ void schedule()
 void enqueue_task(struct task_struct *p, struct sched_array *array)
 {
 	struct sched_array *new = (struct sched_array *) malloc( sizeof(struct sched_array) );
-    new->task = *p;
+	p->array = array;
+	p->run_list = new->list;
+	new->task = p;
 
 	struct sched_array *tmp;
-	list_for_each_entry(tmp, &array, list)
+	list_for_each_entry(tmp, &(array->list), list)
 	{
 		if( tmp->task->time_slice > p->time_slice )
 		{
-			list_add( new , &(tmp->list.prev) );
+			list_add( &(new->list), tmp->list.prev );
 			break;
 		}
 	}
@@ -103,6 +105,7 @@ void enqueue_task(struct task_struct *p, struct sched_array *array)
  */
 void dequeue_task(struct task_struct *p, struct sched_array *array)
 {
+	list_del(p->list);
 }
 
 /* sched_fork
