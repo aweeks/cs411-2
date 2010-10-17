@@ -90,6 +90,7 @@ void killschedule()
 void schedule()
 {
 	struct task_struct * next_task = rq->active->task;
+	rq->curr = next_task;
 	dequeue_task(next_task, NULL);
 	next_task -> need_reschedule = 0;
 	context_switch(next_task);
@@ -121,7 +122,7 @@ void enqueue_task(struct task_struct *p, struct sched_array *array)
  */
 void dequeue_task(struct task_struct *p, struct sched_array *array)
 {
-        rq->curr = p;  
+         
 	list_del( &(p->run_list) );
 }
 
@@ -172,6 +173,7 @@ void wake_up_new_task(struct task_struct *p)
  */
 void __activate_task(struct task_struct *p)
 {
+	enqueue(p,rq->active);
 }
 
 /* activate_task
@@ -189,4 +191,5 @@ void activate_task(struct task_struct *p)
  */
 void deactivate_task(struct task_struct *p)
 {
+	dequeue(p,NULL);
 }
