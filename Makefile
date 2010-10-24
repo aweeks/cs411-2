@@ -24,10 +24,10 @@ app: cpu.o cpuinit.o  schedule.o
 	gcc -o vmsched cpuinit.o cpu.o schedule.o
 
 cpu.o: cpu.c $(SCHEDULE) $(PUBLICH) $(PRIVATEH)
-	gcc -c cpu.c
+	gcc -g -c cpu.c
 
 cpuinit.o: cpuinit.c $(SCHEDULE) $(PUBLICH) $(PRIVATEH)
-	gcc -c cpuinit.c
+	gcc -g -c cpuinit.c
 
 schedule.o: $(SCHEDULE) $(PUBLICH)
-	gcc -c schedule.c
+	gcc -g schedule.c
