@@ -92,8 +92,10 @@ void killschedule()
 void schedule()
 {
 	struct task_struct * next_task = rq->active->task;
-	rq->curr = next_task;
-	dequeue_task(next_task, NULL);
+
+	if (  (rq->curr = next_task) != NULL ) {
+	    dequeue_task(next_task, NULL);
+    }
 	next_task -> need_reschedule = 0;
 	context_switch(next_task);
 }
