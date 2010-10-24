@@ -56,7 +56,7 @@ void initschedule(struct runqueue *newrq, struct task_struct *seedTask)
     INIT_LIST_HEAD( &rq->expired->list );
     
     enqueue_task(seedTask, rq->active);
-    schedule();
+    //schedule();
 }
 
 /* killschedule
@@ -92,12 +92,12 @@ void killschedule()
 void schedule()
 {
 	struct task_struct * next_task = rq->active->task;
-
 	if (  (rq->curr = next_task) != NULL ) {
 	    dequeue_task(next_task, NULL);
+	    next_task -> need_reschedule = 0;
     }
-	next_task -> need_reschedule = 0;
-	context_switch(next_task);
+	
+    context_switch(next_task);
 }
 
 /* enqueue_task
@@ -113,12 +113,17 @@ void enqueue_task(struct task_struct *p, struct sched_array *array)
 	struct sched_array *tmp;
 	list_for_each_entry(tmp, &(array->list), list)
 	{
-		if( tmp->task->time_slice > p->time_slice )
+        if( tmp->task->time_slice > p->time_slice )
 		{
 			list_add( &(new->list), tmp->list.prev );
 			break;
 		}
 	}
+
+    //If the list is empty, add new task
+    if ( array->list.next == array->list.prev ) {
+        list_add( &new->list, array->list.next );
+    }
 }
 
 /* dequeue_task
