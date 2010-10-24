@@ -173,7 +173,7 @@ void wake_up_new_task(struct task_struct *p)
  */
 void __activate_task(struct task_struct *p)
 {
-	enqueue(p,rq->active);
+	enqueue_task(p,rq->active);
 }
 
 /* activate_task
@@ -191,5 +191,5 @@ void activate_task(struct task_struct *p)
  */
 void deactivate_task(struct task_struct *p)
 {
-	dequeue(p,NULL);
+	dequeue_task(p,NULL);
 }
