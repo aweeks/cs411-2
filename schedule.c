@@ -92,7 +92,9 @@ void killschedule()
 void schedule()
 {
 	struct sched_array * next  = list_entry( rq->active->list.next, struct sched_array, list );
-	//if (  (rq->curr = next_task) != NULL ) {
+	dequeue_task(next->task, NULL);
+
+    //if (  (rq->curr = next_task) != NULL ) {
 	//    dequeue_task(next_task, NULL);
 	//    next_task -> need_reschedule = 0;
     //}
@@ -107,7 +109,7 @@ void enqueue_task(struct task_struct *p, struct sched_array *array)
 {
 	struct sched_array *new = (struct sched_array *) malloc( sizeof(struct sched_array) );
 	p->array = array;
-	p->run_list = new->list;
+	p->run_list = array->list;
 	new->task = p;
 
 	struct sched_array *tmp;
