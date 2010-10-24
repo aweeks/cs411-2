@@ -67,12 +67,14 @@ void initschedule(struct runqueue *newrq, struct task_struct *seedTask)
 void killschedule()
 {
    
-    struct sched_array *tmp;	
-    list_for_each_safe(tmp, &(rq->active->list), list)
+    
+    //struct list_head *pos = rq->active->list; 	  
+    struct sched_array *tmp,*next;	
+    list_for_each_entry_safe(tmp,next, &(rq->active->list),list)
     {
 	free(&tmp->list); //not sure about freeing task_structs
     }	 
-    list_for_each_safe(tmp, &(rq->expired->list), list)
+    list_for_each_entry_safe(tmp,next, &(rq->expired->list), list)
     {
         free(&tmp->list);
     }
