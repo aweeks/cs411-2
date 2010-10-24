@@ -132,8 +132,8 @@ void dequeue_task(struct task_struct *p, struct sched_array *array)
 void sched_fork(struct task_struct *p)
 {
 	// To prevent loss of odd timeslices on fork, add one to child (before bitshift)
-	p->time_slice = ( current->time_slice + 1 ) >> 2;
-	current->time_slice = ( current->time_slice ) >> 2;
+	p->time_slice = ( current->time_slice + 1 ) >> 1;
+	current->time_slice >>= 1;
 	if ( current->time_slice <= 0 )
 	{
 		current->need_reschedule = 1;
