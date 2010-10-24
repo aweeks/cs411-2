@@ -30,4 +30,4 @@ cpuinit.o: cpuinit.c $(SCHEDULE) $(PUBLICH) $(PRIVATEH)
 	gcc -g -c cpuinit.c
 
 schedule.o: $(SCHEDULE) $(PUBLICH)
-	gcc -g schedule.c
+	gcc -g -c schedule.c
