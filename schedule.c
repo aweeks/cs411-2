@@ -91,13 +91,13 @@ void killschedule()
  */
 void schedule()
 {
-	struct task_struct * next_task = rq->active->task;
-	if (  (rq->curr = next_task) != NULL ) {
-	    dequeue_task(next_task, NULL);
-	    next_task -> need_reschedule = 0;
-    }
+	struct sched_array * next  = list_entry( rq->active->list.next, struct sched_array, list );
+	//if (  (rq->curr = next_task) != NULL ) {
+	//    dequeue_task(next_task, NULL);
+	//    next_task -> need_reschedule = 0;
+    //}
 	
-    context_switch(next_task);
+    context_switch(next->task);
 }
 
 /* enqueue_task
@@ -122,7 +122,7 @@ void enqueue_task(struct task_struct *p, struct sched_array *array)
 
     //If the list is empty, add new task
     if ( array->list.next == array->list.prev ) {
-        list_add( &new->list, array->list.next );
+        list_add( &new->list, &array->list );
     }
 }
 
