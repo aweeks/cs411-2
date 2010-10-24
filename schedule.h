@@ -97,6 +97,7 @@ void __activate_task(struct task_struct *p);
 void scheduler_tick(struct task_struct *p);
 void sched_fork(struct task_struct *p);
 void wake_up_new_task(struct task_struct *p);
+long long unsigned get_timestamp();
 
 /*------------These functions are not necessary, but used----------------*
  *------------by linux normally for scheduling           ----------------*/

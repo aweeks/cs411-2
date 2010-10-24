@@ -4,6 +4,7 @@
  */
 #include "schedule.h"
 #include "macros.h"
+#include <sys/time.h>
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -72,7 +73,7 @@ void killschedule()
     struct sched_array *tmp,*next;	
     list_for_each_entry_safe(tmp,next, &(rq->active->list),list)
     {
-	free(&tmp->list); //not sure about freeing task_structs
+		free(&tmp->list); //not sure about freeing task_structs
     }	 
     list_for_each_entry_safe(tmp,next, &(rq->expired->list), list)
     {
@@ -145,10 +146,6 @@ void sched_fork(struct task_struct *p)
 	// To prevent loss of odd timeslices on fork, add one to child (before bitshift)
 	p->time_slice = ( current->time_slice + 1 ) >> 1;
 	current->time_slice >>= 1;
-	if ( current->time_slice <= 0 )
-	{
-		current->need_reschedule = 1;
-	}
 }
 
 /* scheduler_tick
@@ -173,7 +170,18 @@ void scheduler_tick(struct task_struct *p)
  * call scheduler to allow for this one to run
  */
 void wake_up_new_task(struct task_struct *p)
-{	
+{
+	p->last_ran = 0;
+	p->sleep_avg = 0;					
+	p->timestamp = get_timestamp();				
+	p->sched_time = 0;				
+	p->first_time_slice = p->time_slice;
+
+	if (current->need_reschedule == 1){
+		
+	} else {
+		enqueue_task(p, NULL);
+	}
 }
 
 /* __activate_task
@@ -203,4 +211,11 @@ void activate_task(struct task_struct *p)
 void deactivate_task(struct task_struct *p)
 {
 	dequeue_task(p,NULL);
+}
+
+long long unsigned get_timestamp(){
+
+    time_t ltime; /* calendar time */
+    ltime = time(NULL); /* get current cal time */
+    return ltime;
 }
