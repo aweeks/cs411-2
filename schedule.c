@@ -68,13 +68,13 @@ void killschedule()
 {
    
     struct sched_array *tmp;	
-    list_for_each_entry(tmp, &(active->list), list)
+    list_for_each_entry(tmp, &(rq->active->list), list)
     {
-	free(tmp->list); //not sure about freeing task_structs
+	free(&tmp->list); //not sure about freeing task_structs
     }	 
-    list_for_each_entry(tmp, &(expired->list), list)
+    list_for_each_entry(tmp, &(rq->expired->list), list)
     {
-        free(tmp->list);
+        free(&tmp->list);
     }
     free(rq->active);
     free(rq->expired);
