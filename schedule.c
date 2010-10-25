@@ -101,16 +101,20 @@ void killschedule()
  */
 void schedule()
 {
-	// The process didn't finish yet, but its time slice is expired; Reset the time slice.
-	rq->curr->time_slice = rq->curr->first_time_slice;
-	
-	// Find the shortest job remaining and run it.
 	struct sched_array *tmp, *new = rq->active;
-	list_for_each_entry(tmp, &(rq->active->list), list)
+
+	// The process didn't finish yet, but its time slice is expired; Reset the time slice.
+	if (rq->curr != 0)
 	{
-		if (new->task->time_slice > tmp->task->time_slice)
+		rq->curr->time_slice = rq->curr->first_time_slice;
+		
+		// Find the shortest job remaining and run it.
+		list_for_each_entry(tmp, &(rq->active->list), list)
 		{
-			new = tmp;
+			if (new->task->time_slice > tmp->task->time_slice)
+			{
+				new = tmp;
+			}
 		}
 	}
 
