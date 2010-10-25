@@ -140,6 +140,7 @@ void schedule()
 		if(rq->curr != new->task ){
             context_switch(new->task);
 		    rq->curr = new->task;
+		    current = new->task;
 		    rq->nr_switches++;
         }
 	}
@@ -167,6 +168,7 @@ void enqueue_task(struct task_struct *p, struct sched_array *array)
  */
 //You will likely not call this because you are using only one array.
 //Call when the process is dead
+//
 void dequeue_task(struct task_struct *p, struct sched_array *array)
 {
 	#ifdef DEBUG
