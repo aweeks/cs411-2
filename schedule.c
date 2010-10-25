@@ -76,8 +76,6 @@ void initschedule(struct runqueue *newrq, struct task_struct *seedTask)
  */
 void killschedule()
 {
-   
-    
     //struct list_head *pos = rq->active->list; 	  
     struct sched_array *tmp,*next;	
     list_for_each_entry_safe(tmp,next, &(rq->active->list),list)
@@ -140,9 +138,11 @@ void enqueue_task(struct task_struct *p, struct sched_array *array)
 /* dequeue_task
  * Removes a task from the passed sched_array
  */
+//You will likely not call this because you are using only one array.
+//Call when the process is dead
 void dequeue_task(struct task_struct *p, struct sched_array *array)
 {
-         
+   
 	list_del( &(p->run_list) );
 	//rq->nr_running--;
 	printqueue();

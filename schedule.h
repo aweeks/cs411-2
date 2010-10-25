@@ -37,6 +37,7 @@ struct task_struct
 	int prio, static_prio, normal_prio;			/* Priority values */	
 	unsigned long sleep_avg;					/* The average time the task
 												   has been sleeping */
+	//Don't care
 	unsigned long long last_ran;				/* Timestamp for when the
 												   task was last run. */
 	unsigned long long timestamp;				/* A timestamp value */
