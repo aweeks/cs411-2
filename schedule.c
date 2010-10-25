@@ -101,16 +101,22 @@ void killschedule()
  */
 void schedule()
 {
-	struct sched_array * next  = list_entry( rq->active->list.next, struct sched_array, list );
-	dequeue_task(next->task, NULL);
-
-    //if (  (rq->curr = next_task) != NULL ) {
-	//    dequeue_task(next_task, NULL);
-	//    next_task -> need_reschedule = 0;
-    //}
+	// The process didn't finish yet, but its time slice is expired; Reset the time slice.
+	rq->curr->time_slice = rq->curr->first_time_slice;
 	
-    next->task->time_slice = next->task->first_time_slice;
-    context_switch(next->task);
+	// Find the shortest job remaining and run it.
+	struct sched_array *tmp, *new = rq->active;
+	list_for_each_entry(tmp, &(rq->active->list), list)
+	{
+		if (new->task->time_slice > tmp->task->time_slice)
+		{
+			new = tmp;
+		}
+	}
+
+	context_switch(new->task);
+	rq->curr = new->task;
+	rq->nr_switches++;
 }
 
 /* enqueue_task
@@ -123,22 +129,8 @@ void enqueue_task(struct task_struct *p, struct sched_array *array)
 	p->run_list = array->list;
 	new->task = p;
 
-	struct sched_array *tmp;
-	list_for_each_entry(tmp, &(array->list), list)
-	{
-        if( tmp->task->time_slice > p->time_slice )
-		{
-			list_add( &(new->list), tmp->list.prev );
-			break;
-		}
-	}
-
-    //If the list is empty, add new task
-    if ( array->list.next == array->list.prev ) {
         list_add( &new->list, &array->list );
-    }
-    //rq->nr_running++;
-    printqueue();
+	printqueue();
 }
 
 /* dequeue_task
@@ -148,8 +140,8 @@ void dequeue_task(struct task_struct *p, struct sched_array *array)
 {
          
 	list_del( &(p->run_list) );
-    //rq->nr_running--;
-    printqueue();
+	//rq->nr_running--;
+	printqueue();
 }
 
 /* sched_fork
