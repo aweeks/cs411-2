@@ -102,29 +102,32 @@ void killschedule()
  */
 void schedule()
 {
-	struct sched_array *tmp, *new = list_entry(rq->active->list.next, struct sched_array, list);
-
-	// The process didn't finish yet, but its time slice is expired; Reset the time slice.
-	if (rq->curr != 0)
+	if (rq->nr_running > 0)
 	{
-		rq->curr->time_slice = rq->curr->first_time_slice;
-		rq->curr->need_reschedule = 0;
-		//list_del(&rq->curr->run_list);
-		//list_add_tail(&rq->curr->array->list, &rq->active->list);
-		
-		// Find the shortest job remaining and run it.
-		list_for_each_entry(tmp, &(rq->active->list), list)
+		struct sched_array *tmp, *new = list_entry(rq->active->list.next, struct sched_array, list);
+	
+		// The process didn't finish yet, but its time slice is expired; Reset the time slice.
+		if (rq->curr != 0)
 		{
-			if (new->task->time_slice > tmp->task->time_slice)
+			rq->curr->time_slice = rq->curr->first_time_slice;
+			rq->curr->need_reschedule = 0;
+			//list_del(&rq->curr->run_list);
+			//list_add_tail(&rq->curr->array->list, &rq->active->list);
+			
+			// Find the shortest job remaining and run it.
+			list_for_each_entry(tmp, &(rq->active->list), list)
 			{
-				new = tmp;
+				if (new->task->time_slice > tmp->task->time_slice)
+				{
+					new = tmp;
+				}
 			}
 		}
-	}
 
-	context_switch(new->task);
-	rq->curr = new->task;
-	rq->nr_switches++;
+		context_switch(new->task);
+		rq->curr = new->task;
+		rq->nr_switches++;
+	}
 }
 
 /* enqueue_task
