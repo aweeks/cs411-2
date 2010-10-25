@@ -65,6 +65,9 @@ void initschedule(struct runqueue *newrq, struct task_struct *seedTask)
     INIT_LIST_HEAD( &rq->expired->list );
     
     enqueue_task(seedTask, rq->active);
+    
+    seedTask->time_slice = seedTask->first_time_slice = NEWTASKSLICE;
+    
     rq->nr_running++;
     //schedule();
 }
@@ -99,7 +102,7 @@ void killschedule()
  */
 void schedule()
 {
-	struct sched_array *tmp, *new = list_entry(rq->active->list.next, struct sched_array, list);
+	struct sched_array *tmp, *new = rq->active;
 
 	// The process didn't finish yet, but its time slice is expired; Reset the time slice.
 	if (rq->curr != 0)
