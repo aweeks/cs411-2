@@ -125,16 +125,15 @@ void schedule()
 }
 
 /* enqueue_task
- * Enqeueus a task in the passed sched_array
+ * Enqueues a task in the passed sched_array
  */
 void enqueue_task(struct task_struct *p, struct sched_array *array)
 {
 	struct sched_array *new = (struct sched_array *) malloc( sizeof(struct sched_array) );
 	p->array = array;
-	p->run_list = array->list;
 	new->task = p;
-
         list_add( &new->list, &array->list );
+	p->run_list = new->list;
 	printqueue();
 }
 
