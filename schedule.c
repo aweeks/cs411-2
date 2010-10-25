@@ -35,7 +35,7 @@ void printqueue() {
 
 	struct sched_array *tmp;
 	list_for_each_entry(tmp, &rq->active->list, list) {
-        printf("entry: %x\n", (unsigned int) tmp->task);
+        printf("entry: %x timeslice: %u\n", (unsigned int) tmp->task, tmp->task->time_slice);
     }
 }
 
