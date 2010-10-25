@@ -30,6 +30,14 @@ struct task_struct *current;
  */
 extern long long jiffies;
 
+void printqueue() {
+    printf("ACTIVE QUEUE\n");
+
+	struct sched_array *tmp;
+	list_for_each_entry(tmp, &rq->active->list, list) {
+        printf("entry: %x\n", (unsigned int) tmp->task);
+    }
+}
 
 /*-----------------Initilization/Shutdown Code-------------------*/
 /* This code is not used by the scheduler, but by the virtual machine
@@ -57,6 +65,7 @@ void initschedule(struct runqueue *newrq, struct task_struct *seedTask)
     INIT_LIST_HEAD( &rq->expired->list );
     
     enqueue_task(seedTask, rq->active);
+    rq->nr_running++;
     //schedule();
 }
 
@@ -100,6 +109,7 @@ void schedule()
 	//    next_task -> need_reschedule = 0;
     //}
 	
+    
     context_switch(next->task);
 }
 
@@ -127,6 +137,8 @@ void enqueue_task(struct task_struct *p, struct sched_array *array)
     if ( array->list.next == array->list.prev ) {
         list_add( &new->list, &array->list );
     }
+    //rq->nr_running++;
+    printqueue();
 }
 
 /* dequeue_task
@@ -136,6 +148,8 @@ void dequeue_task(struct task_struct *p, struct sched_array *array)
 {
          
 	list_del( &(p->run_list) );
+    //rq->nr_running--;
+    printqueue();
 }
 
 /* sched_fork
@@ -178,9 +192,11 @@ void wake_up_new_task(struct task_struct *p)
 	p->first_time_slice = p->time_slice;
 
 	if (current->need_reschedule == 1){
-		
+        enqueue_task(p, rq->active);
+        rq->nr_running++;		
 	} else {
-		enqueue_task(p, NULL);
+		enqueue_task(p, rq->active);
+        rq->nr_running++;
 	}
 }
 
@@ -193,6 +209,7 @@ void wake_up_new_task(struct task_struct *p)
 void __activate_task(struct task_struct *p)
 {
 	enqueue_task(p,rq->active);
+    rq->nr_running++;
 }
 
 /* activate_task
@@ -211,6 +228,7 @@ void activate_task(struct task_struct *p)
 void deactivate_task(struct task_struct *p)
 {
 	dequeue_task(p,NULL);
+    rq->nr_running--;
 }
 
 long long unsigned get_timestamp(){
