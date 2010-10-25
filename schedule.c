@@ -109,7 +109,7 @@ void schedule()
 	//    next_task -> need_reschedule = 0;
     //}
 	
-    
+    next->task->time_slice = next->task->first_time_slice;
     context_switch(next->task);
 }
 
