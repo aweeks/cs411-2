@@ -137,9 +137,11 @@ void schedule()
         #ifdef DEBUG
 			printf("SCHEDULE %x\n", (unsigned int) new->task);
 		#endif
-		context_switch(new->task);
-		rq->curr = new->task;
-		rq->nr_switches++;
+		if(rq->curr != new->task ){
+            context_switch(new->task);
+		    rq->curr = new->task;
+		    rq->nr_switches++;
+        }
 	}
 }
 

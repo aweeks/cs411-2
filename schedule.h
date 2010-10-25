@@ -5,7 +5,7 @@
 #include "list.h"
 
 //Comment for print statement to help with Debugging
-#define DEBUG
+//#define DEBUG
 
 /*
  * Handled by the processor.  We should not have to impliment it,
