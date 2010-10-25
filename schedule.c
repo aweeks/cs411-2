@@ -171,6 +171,12 @@ void dequeue_task(struct task_struct *p, struct sched_array *array)
 		printf("DEQUEUE %x\n", (unsigned int) p);
 	#endif
 	
+	// If the process we're removing is the current process, make sure to remove the reference.
+	if (rq->current = p)
+	{
+		rq->current = NULL;
+	}
+	
 	list_del( &(p->array->list) );
 	//rq->nr_running--;
 	printqueue();
