@@ -101,7 +101,7 @@ void killschedule()
  */
 void schedule()
 {
-	struct sched_array *tmp, *new = rq->active;
+	struct sched_array *tmp, *new = list_entry(rq->active->list.next, struct sched_array, list);
 
 	// The process didn't finish yet, but its time slice is expired; Reset the time slice.
 	if (rq->curr != 0)
