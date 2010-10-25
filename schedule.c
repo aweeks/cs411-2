@@ -108,6 +108,8 @@ void schedule()
 	if (rq->curr != 0)
 	{
 		rq->curr->time_slice = rq->curr->first_time_slice;
+		list_del(&rq->curr->run_list);
+		list_add_tail(&rq->curr->array->list, &rq->active->list);
 		
 		// Find the shortest job remaining and run it.
 		list_for_each_entry(tmp, &(rq->active->list), list)
