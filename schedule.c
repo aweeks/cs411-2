@@ -31,12 +31,14 @@ struct task_struct *current;
 extern long long jiffies;
 
 void printqueue() {
-    printf("ACTIVE QUEUE:\n");
+    #ifdef DEBUG
+		printf("ACTIVE QUEUE:\n");
 
-	struct sched_array *tmp;
-	list_for_each_entry(tmp, &rq->active->list, list) {
-        printf("    %x timeslice: %u\n", (unsigned int) tmp->task, tmp->task->time_slice);
-    }
+		struct sched_array *tmp;
+		list_for_each_entry(tmp, &rq->active->list, list) {
+			printf("    %x timeslice: %u\n", (unsigned int) tmp->task, tmp->task->time_slice);
+		}
+    #endif
 }
 
 /*-----------------Initilization/Shutdown Code-------------------*/
@@ -114,7 +116,9 @@ void schedule()
             }
 			rq->curr->need_reschedule = 0;
 			
-            printf("MOVING TO BACK\n");
+			#ifdef DEBUG
+				printf("MOVING TO BACK\n");
+            #endif
             printqueue();
             list_del( &rq->curr->array->list);
             printqueue();
@@ -130,9 +134,9 @@ void schedule()
 				}
 			}
 		}
-        
-        printf("SCHEDULE %x\n", (unsigned int) new->task);
-
+        #ifdef DEBUG
+			printf("SCHEDULE %x\n", (unsigned int) new->task);
+		#endif
 		context_switch(new->task);
 		rq->curr = new->task;
 		rq->nr_switches++;
@@ -144,7 +148,9 @@ void schedule()
  */
 void enqueue_task(struct task_struct *p, struct sched_array *array)
 {
-	printf("ENQUEUE %x\n", (unsigned int)  p);
+	#ifdef DEBUG
+		printf("ENQUEUE %x\n", (unsigned int)  p);
+    #endif
     struct sched_array *new = (struct sched_array *) malloc( sizeof(struct sched_array) );
 	
     p->array = new;
@@ -161,8 +167,10 @@ void enqueue_task(struct task_struct *p, struct sched_array *array)
 //Call when the process is dead
 void dequeue_task(struct task_struct *p, struct sched_array *array)
 {
-   
-    printf("DEQUEUE %x\n", (unsigned int) p);
+	#ifdef DEBUG
+		printf("DEQUEUE %x\n", (unsigned int) p);
+	#endif
+	
 	list_del( &(p->array->list) );
 	//rq->nr_running--;
 	printqueue();
@@ -173,7 +181,9 @@ void dequeue_task(struct task_struct *p, struct sched_array *array)
  */
 void sched_fork(struct task_struct *p)
 {
-	printf("FORK %x\n", (unsigned int) p);
+	#ifdef DEBUG
+		printf("FORK %x\n", (unsigned int) p);
+    #endif
     // To prevent loss of odd timeslices on fork, add one to child (before bitshift)
 	p->time_slice = ( current->time_slice + 1 ) >> 1;
 	current->time_slice >>= 1;
@@ -185,7 +195,9 @@ void sched_fork(struct task_struct *p)
  */
 void scheduler_tick(struct task_struct *p)
 {	
-	printf("TICK %x\n", (unsigned int) p);
+	#ifdef DEBUG	
+		printf("TICK %x\n", (unsigned int) p);
+    #endif
     p->time_slice--;
 	if ( p->time_slice <= 0 )
 	{
@@ -203,7 +215,10 @@ void scheduler_tick(struct task_struct *p)
  */
 void wake_up_new_task(struct task_struct *p)
 {
-	printf("WAKE %x\n", (unsigned int) p );
+	#ifdef DEBUG
+		printf("WAKE %x\n", (unsigned int) p );
+    #endif
+    
     p->last_ran = 0;
 	p->sleep_avg = 0;					
 	p->timestamp = get_timestamp();				
@@ -227,7 +242,10 @@ void wake_up_new_task(struct task_struct *p)
  */
 void __activate_task(struct task_struct *p)
 {
-	printf("ACTIVATE %x\n", (unsigned int) p);
+	#ifdef DEBUG	
+		printf("ACTIVATE %x\n", (unsigned int) p);
+    #endif
+    
     enqueue_task(p,rq->active);
     rq->nr_running++;
 }
@@ -247,7 +265,10 @@ void activate_task(struct task_struct *p)
  */
 void deactivate_task(struct task_struct *p)
 {
-	printf("DEACTIVATE %x\n", (unsigned int) p);
+	#ifdef DEBUG	
+		printf("DEACTIVATE %x\n", (unsigned int) p);
+	#endif
+	
     dequeue_task(p,NULL);
     rq->nr_running--;
 }

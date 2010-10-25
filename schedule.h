@@ -4,6 +4,9 @@
 #include "macros.h"
 #include "list.h"
 
+//Comment for print statement to help with Debugging
+#define DEBUG
+
 /*
  * Handled by the processor.  We should not have to impliment it,
  * but will be useful in debugging.
