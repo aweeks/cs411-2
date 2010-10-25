@@ -74,9 +74,13 @@ struct runqueue {
     struct task_struct *curr;					/* the currently running task */
     struct sched_array  *active;				/* pointer to the active priority
 												   array */
+	//Don't care about this
     struct sched_array  *expired;				/* pointer to the expired
 											       priority array */
+    //Don't care about this
     struct sched_array  arrays[2];				/* the actual priority arrays */
+	
+	//Don't care about this
 	int best_expired_prio;						/* The highest priority that has
 												 * expired thus far */
 };
