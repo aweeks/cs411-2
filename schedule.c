@@ -31,11 +31,11 @@ struct task_struct *current;
 extern long long jiffies;
 
 void printqueue() {
-    printf("ACTIVE QUEUE\n");
+    printf("ACTIVE QUEUE:\n");
 
 	struct sched_array *tmp;
 	list_for_each_entry(tmp, &rq->active->list, list) {
-        printf("entry: %x timeslice: %u\n", (unsigned int) tmp->task, tmp->task->time_slice);
+        printf("    %x timeslice: %u\n", (unsigned int) tmp->task, tmp->task->time_slice);
     }
 }
 
@@ -107,13 +107,20 @@ void schedule()
 		struct sched_array *tmp, *new = list_entry(rq->active->list.next, struct sched_array, list);
 	
 		// The process didn't finish yet, but its time slice is expired; Reset the time slice.
-		if (rq->curr != 0)
+		if (rq->curr != NULL)
 		{
-			rq->curr->time_slice = rq->curr->first_time_slice;
+			if( rq->curr->time_slice == 0 ){
+                rq->curr->time_slice = rq->curr->first_time_slice;
+            }
 			rq->curr->need_reschedule = 0;
-			//list_del(&rq->curr->run_list);
-			//list_add_tail(&rq->curr->array->list, &rq->active->list);
 			
+            printf("MOVING TO BACK\n");
+            printqueue();
+            list_del( &rq->curr->array->list);
+            printqueue();
+			list_add_tail(&rq->curr->array->list, &rq->active->list);	
+            //printqueue();
+
 			// Find the shortest job remaining and run it.
 			list_for_each_entry(tmp, &(rq->active->list), list)
 			{
@@ -123,6 +130,8 @@ void schedule()
 				}
 			}
 		}
+        
+        printf("SCHEDULE %x\n", (unsigned int) new->task);
 
 		context_switch(new->task);
 		rq->curr = new->task;
@@ -135,12 +144,14 @@ void schedule()
  */
 void enqueue_task(struct task_struct *p, struct sched_array *array)
 {
-	struct sched_array *new = (struct sched_array *) malloc( sizeof(struct sched_array) );
-	p->array = array;
+	printf("ENQUEUE %x\n", (unsigned int)  p);
+    struct sched_array *new = (struct sched_array *) malloc( sizeof(struct sched_array) );
+	
+    p->array = new;
 	new->task = p;
-        list_add( &new->list, &array->list );
-	p->run_list = new->list;
-	printqueue();
+    list_add( &new->list, &array->list );
+	
+    printqueue();
 }
 
 /* dequeue_task
@@ -151,7 +162,8 @@ void enqueue_task(struct task_struct *p, struct sched_array *array)
 void dequeue_task(struct task_struct *p, struct sched_array *array)
 {
    
-	list_del( &(p->run_list) );
+    printf("DEQUEUE %x\n", (unsigned int) p);
+	list_del( &(p->array->list) );
 	//rq->nr_running--;
 	printqueue();
 }
@@ -161,7 +173,8 @@ void dequeue_task(struct task_struct *p, struct sched_array *array)
  */
 void sched_fork(struct task_struct *p)
 {
-	// To prevent loss of odd timeslices on fork, add one to child (before bitshift)
+	printf("FORK %x\n", (unsigned int) p);
+    // To prevent loss of odd timeslices on fork, add one to child (before bitshift)
 	p->time_slice = ( current->time_slice + 1 ) >> 1;
 	current->time_slice >>= 1;
 }
@@ -172,7 +185,8 @@ void sched_fork(struct task_struct *p)
  */
 void scheduler_tick(struct task_struct *p)
 {	
-	p->time_slice--;
+	printf("TICK %x\n", (unsigned int) p);
+    p->time_slice--;
 	if ( p->time_slice <= 0 )
 	{
 		p->need_reschedule = 1;
@@ -189,7 +203,8 @@ void scheduler_tick(struct task_struct *p)
  */
 void wake_up_new_task(struct task_struct *p)
 {
-	p->last_ran = 0;
+	printf("WAKE %x\n", (unsigned int) p );
+    p->last_ran = 0;
 	p->sleep_avg = 0;					
 	p->timestamp = get_timestamp();				
 	p->sched_time = 0;				
@@ -212,7 +227,8 @@ void wake_up_new_task(struct task_struct *p)
  */
 void __activate_task(struct task_struct *p)
 {
-	enqueue_task(p,rq->active);
+	printf("ACTIVATE %x\n", (unsigned int) p);
+    enqueue_task(p,rq->active);
     rq->nr_running++;
 }
 
@@ -222,7 +238,7 @@ void __activate_task(struct task_struct *p)
  */
 void activate_task(struct task_struct *p)
 {	
-	__activate_task(p);	
+    __activate_task(p);	
 }
 
 /* deactivate_task
@@ -231,7 +247,8 @@ void activate_task(struct task_struct *p)
  */
 void deactivate_task(struct task_struct *p)
 {
-	dequeue_task(p,NULL);
+	printf("DEACTIVATE %x\n", (unsigned int) p);
+    dequeue_task(p,NULL);
     rq->nr_running--;
 }
 
