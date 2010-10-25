@@ -193,8 +193,8 @@ void sched_fork(struct task_struct *p)
 		printf("FORK %x\n", (unsigned int) p);
     #endif
     // To prevent loss of odd timeslices on fork, add one to child (before bitshift)
-	p->time_slice = ( current->time_slice + 1 ) >> 1;
-	//current->time_slice >>= 1;
+	p->time_slice = ( rq->curr->time_slice + 1 ) >> 1;
+    rq->curr->time_slice >>= 2;
 }
 
 /* scheduler_tick
@@ -233,13 +233,8 @@ void wake_up_new_task(struct task_struct *p)
 	p->sched_time = 0;				
 	p->first_time_slice = p->time_slice;
 
-	if (current->need_reschedule == 1){
-        enqueue_task(p, rq->active);
-        rq->nr_running++;		
-	} else {
-		enqueue_task(p, rq->active);
-        rq->nr_running++;
-	}
+    enqueue_task(p, rq->active);
+    rq->nr_running++;		
 }
 
 /* __activate_task
