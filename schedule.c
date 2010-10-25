@@ -172,9 +172,9 @@ void dequeue_task(struct task_struct *p, struct sched_array *array)
 	#endif
 	
 	// If the process we're removing is the current process, make sure to remove the reference.
-	if (rq->current = p)
+	if (rq->curr = p)
 	{
-		rq->current = NULL;
+		rq->curr = NULL;
 	}
 	
 	list_del( &(p->array->list) );
