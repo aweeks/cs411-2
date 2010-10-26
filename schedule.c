@@ -31,14 +31,14 @@ struct task_struct *current;
 extern long long jiffies;
 
 void printqueue() {
-    #ifdef DEBUG
+	#ifdef DEBUG
 		printf("ACTIVE QUEUE:\n");
 
 		struct sched_array *tmp;
 		list_for_each_entry(tmp, &rq->active->list, list) {
 			printf("    %x timeslice: %u\n", (unsigned int) tmp->task, tmp->task->time_slice);
 		}
-    #endif
+	#endif
 }
 
 /*-----------------Initilization/Shutdown Code-------------------*/
@@ -59,19 +59,19 @@ void printqueue() {
   */
 void initschedule(struct runqueue *newrq, struct task_struct *seedTask)
 {
-    rq = newrq;
-    rq -> active  = (struct sched_array *) malloc( sizeof(struct sched_array) );
-    INIT_LIST_HEAD( &rq->active->list );
+	rq = newrq;
+	rq -> active  = (struct sched_array *) malloc( sizeof(struct sched_array) );
+	INIT_LIST_HEAD( &rq->active->list );
 
-    rq -> expired = (struct sched_array *) malloc( sizeof(struct sched_array) );
-    INIT_LIST_HEAD( &rq->expired->list );
-    
-    enqueue_task(seedTask, rq->active);
-    
-    seedTask->time_slice = seedTask->first_time_slice = NEWTASKSLICE;
-    
-    rq->nr_running++;
-    //schedule();
+	rq -> expired = (struct sched_array *) malloc( sizeof(struct sched_array) );
+	INIT_LIST_HEAD( &rq->expired->list );
+
+	enqueue_task(seedTask, rq->active);
+
+	seedTask->time_slice = seedTask->first_time_slice = NEWTASKSLICE;
+
+	rq->nr_running++;
+	//schedule();
 }
 
 /* killschedule
@@ -81,19 +81,18 @@ void initschedule(struct runqueue *newrq, struct task_struct *seedTask)
  */
 void killschedule()
 {
-    //struct list_head *pos = rq->active->list; 	  
-    struct sched_array *tmp,*next;	
-    list_for_each_entry_safe(tmp,next, &(rq->active->list),list)
-    {
+	//struct list_head *pos = rq->active->list; 	  
+	struct sched_array *tmp,*next;	
+	list_for_each_entry_safe(tmp,next, &(rq->active->list),list)
+	{
 		free(&tmp->list); //not sure about freeing task_structs
-    }	 
-    list_for_each_entry_safe(tmp,next, &(rq->expired->list), list)
-    {
-        free(&tmp->list);
-    }
-    free(rq->active);
-    free(rq->expired);
-    
+	}	 
+	list_for_each_entry_safe(tmp,next, &(rq->expired->list), list)
+	{
+		free(&tmp->list);
+	}
+	free(rq->active);
+	free(rq->expired);
 }
 
 /*-------------Scheduler Code Goes Below------------*/
@@ -107,23 +106,25 @@ void schedule()
 	if (rq->nr_running > 0)
 	{
 		struct sched_array *tmp, *new = list_entry(rq->active->list.next, struct sched_array, list);
-	
+
 		// The process didn't finish yet, but its time slice is expired; Reset the time slice.
 		if (rq->curr != NULL)
 		{
-			if( rq->curr->time_slice == 0 ){
-                rq->curr->time_slice = rq->curr->first_time_slice;
-            }
+			if( rq->curr->time_slice == 0 )
+			{
+				rq->curr->time_slice = rq->curr->first_time_slice;
+			}
 			rq->curr->need_reschedule = 0;
 			
 			#ifdef DEBUG
 				printf("MOVING TO BACK\n");
-            #endif
-            printqueue();
-            list_del( &rq->curr->array->list);
-            printqueue();
+			#endif
+
+			printqueue();
+			list_del( &rq->curr->array->list);
+			printqueue();
 			list_add_tail(&rq->curr->array->list, &rq->active->list);	
-            //printqueue();
+			//printqueue();
 
 			// Find the shortest job remaining and run it.
 			list_for_each_entry(tmp, &(rq->active->list), list)
@@ -134,14 +135,15 @@ void schedule()
 				}
 			}
 		}
-        #ifdef DEBUG
+        	#ifdef DEBUG
 			printf("SCHEDULE %x\n", (unsigned int) new->task);
 		#endif
-		if(rq->curr != new->task ){
-            context_switch(new->task);
-		    rq->curr = new->task;
-		    rq->nr_switches++;
-        }
+		if(rq->curr != new->task )
+		{
+			context_switch(new->task);
+			rq->curr = new->task;
+			rq->nr_switches++;
+		}
 	}
 }
 
@@ -152,14 +154,14 @@ void enqueue_task(struct task_struct *p, struct sched_array *array)
 {
 	#ifdef DEBUG
 		printf("ENQUEUE %x\n", (unsigned int)  p);
-    #endif
-    struct sched_array *new = (struct sched_array *) malloc( sizeof(struct sched_array) );
-	
-    p->array = new;
+	#endif
+	struct sched_array *new = (struct sched_array *) malloc( sizeof(struct sched_array) );
+
+	p->array = new;
 	new->task = p;
-    list_add( &new->list, &array->list );
+	list_add( &new->list, &array->list );
 	
-    printqueue();
+	printqueue();
 }
 
 /* dequeue_task
@@ -191,11 +193,12 @@ void sched_fork(struct task_struct *p)
 {
 	#ifdef DEBUG
 		printf("FORK %x\n", (unsigned int) p);
-    #endif
-    // To prevent loss of odd timeslices on fork, add one to child (before bitshift)
+	#endif
+
+	// To prevent loss of odd timeslices on fork, add one to child (before bitshift)
 	p->first_time_slice = rq->curr->first_time_slice; 
 	p->time_slice = ( rq->curr->time_slice + 1 ) >> 1;
-    rq->curr->time_slice >>= 2;
+	rq->curr->time_slice >>= 1;
 }
 
 /* scheduler_tick
@@ -206,8 +209,8 @@ void scheduler_tick(struct task_struct *p)
 {	
 	#ifdef DEBUG	
 		printf("TICK %x\n", (unsigned int) p);
-    #endif
-    p->time_slice--;
+	#endif
+	p->time_slice--;
 	if ( p->time_slice <= 0 )
 	{
 		p->need_reschedule = 1;
@@ -226,11 +229,10 @@ void wake_up_new_task(struct task_struct *p)
 {
 	#ifdef DEBUG
 		printf("WAKE %x\n", (unsigned int) p );
-    #endif
-   
-	
-    enqueue_task(p, rq->active);
-    rq->nr_running++;		
+	#endif
+
+	enqueue_task(p, rq->active);
+	rq->nr_running++;		
 }
 
 /* __activate_task
@@ -243,10 +245,10 @@ void __activate_task(struct task_struct *p)
 {
 	#ifdef DEBUG	
 		printf("ACTIVATE %x\n", (unsigned int) p);
-    #endif
+	#endif
     
-    enqueue_task(p,rq->active);
-    rq->nr_running++;
+	enqueue_task(p,rq->active);
+	rq->nr_running++;
 }
 
 /* activate_task
@@ -268,13 +270,13 @@ void deactivate_task(struct task_struct *p)
 		printf("DEACTIVATE %x\n", (unsigned int) p);
 	#endif
 	
-    dequeue_task(p,NULL);
-    rq->nr_running--;
+	dequeue_task(p,NULL);
+	rq->nr_running--;
 }
 
-long long unsigned get_timestamp(){
-
-    time_t ltime; /* calendar time */
-    ltime = time(NULL); /* get current cal time */
-    return ltime;
+long long unsigned get_timestamp()
+{
+	time_t ltime; /* calendar time */
+	ltime = time(NULL); /* get current cal time */
+	return ltime;
 }
