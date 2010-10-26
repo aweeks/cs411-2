@@ -1,3 +1,14 @@
+/*
+ *  Project 2
+ *    A shortest job remaining scheduler.
+ *  
+ *  Authors:
+ *    Alex Weeks
+ *    Josh Jordahl
+ *    Kevin McIntosh
+ *    Tyler McClung
+ */
+
 #ifndef SCHEDULE_H
 #define SCHEDULE_H
 
