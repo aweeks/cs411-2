@@ -1,3 +1,14 @@
+/*
+ *  Project 2
+ *    A shortest job remaining scheduler.
+ *   
+ *  Authors:
+ *    Alex Weeks    
+ *    Josh Jordahl  
+ *    Kevin McIntosh
+ *    Tyler McClung
+ */
+
 /* schedule.c
  * This file contains the primary logic for the 
  * scheduler.
@@ -30,7 +41,8 @@ struct task_struct *current;
  */
 extern long long jiffies;
 
-void printqueue() {
+void printqueue() 
+{
 	#ifdef DEBUG
 		printf("ACTIVE QUEUE:\n");
 
@@ -194,6 +206,10 @@ void sched_fork(struct task_struct *p)
 	p->first_time_slice = rq->curr->first_time_slice; 
 	p->time_slice = ( rq->curr->time_slice + 1 ) >> 1;
 	rq->curr->time_slice >>= 1;
+	if (rq->curr->time_slice <= 0)
+	{
+		rq->curr->time_slice = rq->curr->first_time_slice;
+	}
 }
 
 /* scheduler_tick
