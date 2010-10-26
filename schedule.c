@@ -71,7 +71,6 @@ void initschedule(struct runqueue *newrq, struct task_struct *seedTask)
 	seedTask->time_slice = seedTask->first_time_slice = NEWTASKSLICE;
 
 	rq->nr_running++;
-	//schedule();
 }
 
 /* killschedule
@@ -81,11 +80,10 @@ void initschedule(struct runqueue *newrq, struct task_struct *seedTask)
  */
 void killschedule()
 {
-	//struct list_head *pos = rq->active->list; 	  
 	struct sched_array *tmp,*next;	
 	list_for_each_entry_safe(tmp,next, &(rq->active->list),list)
 	{
-		free(&tmp->list); //not sure about freeing task_structs
+		free(&tmp->list); 
 	}	 
 	list_for_each_entry_safe(tmp,next, &(rq->expired->list), list)
 	{
@@ -124,8 +122,6 @@ void schedule()
 			list_del( &rq->curr->array->list);
 			printqueue();
 			list_add_tail(&rq->curr->array->list, &rq->active->list);	
-			//printqueue();
-
 			// Find the shortest job remaining and run it.
 			list_for_each_entry(tmp, &(rq->active->list), list)
 			{
@@ -182,7 +178,6 @@ void dequeue_task(struct task_struct *p, struct sched_array *array)
 	}
 	
 	list_del( &(p->array->list) );
-	//rq->nr_running--;
 	printqueue();
 }
 
