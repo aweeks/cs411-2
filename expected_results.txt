@@ -1,0 +1,318 @@
+###-Starting CPU-###
+(Init:0)/10/0ms - Switching Process In
+###-Process: (Spawner:1) has been created-###
+(Spawner:1)/5/50ms - Switching Process In
+(Init:0)/10/100ms - Switching Process In
+###-Process: (Interactive:2) has been created-###
+(Interactive:2)/5/150ms - Switching Process In
+(Spawner:1)/10/200ms - Switching Process In
+###-Process: (Spawner:1):(Interactive:3) has been created-###
+(Spawner:1):(Interactive:3)/5/250ms - Switching Process In
+(Init:0)/10/300ms - Switching Process In
+###-Process: (Non-Interactive:4) has been created-###
+(Non-Interactive:4)/4/360ms - Switching Process In
+(Interactive:2)/10/400ms - Switching Process In
+###-Process: (Interactive:2) is going down-###
+(Spawner:1)/10/400ms - Switching Process In
+###-An Inerrupt has fired!-###
+(Spawner:1):(Interactive:3)/10/500ms - Switching Process In
+	(Spawner:1):(Interactive:3)/3/576ms - Going to Sleep
+(Init:0)/10/577ms - Switching Process In
+###-Process: (Sleeper:5) has been created-###
+###-Process: (Interactive:6) has been created-###
+(Interactive:6)/3/590ms - Switching Process In
+	(Interactive:6)/2/606ms - Going to Sleep
+(Sleeper:5)/5/607ms - Switching Process In
+	(Sleeper:5)/1/648ms - Going to Sleep
+(Non-Interactive:4)/10/649ms - Switching Process In
+	(Non-Interactive:4)/4/702ms - Going to Sleep
+(Spawner:1)/10/703ms - Switching Process In
+(Init:0)/10/800ms - Switching Process In
+###-An Inerrupt has fired!-###
+	(Spawner:1):(Interactive:3)/3/829ms - Waking Up from Sleep
+	(Interactive:6)/2/829ms - Waking Up from Sleep
+	(Sleeper:5)/1/829ms - Waking Up from Sleep
+	(Non-Interactive:4)/4/829ms - Waking Up from Sleep
+(Sleeper:5)/1/830ms - Switching Process In
+(Interactive:6)/2/840ms - Switching Process In
+(Spawner:1):(Interactive:3)/3/860ms - Switching Process In
+(Non-Interactive:4)/4/890ms - Switching Process In
+(Init:0)/7/930ms - Switching Process In
+###-An Inerrupt has fired!-###
+(Spawner:1)/10/1000ms - Switching Process In
+(Sleeper:5)/10/1100ms - Switching Process In
+	(Sleeper:5)/4/1165ms - Going to Sleep
+(Interactive:6)/10/1166ms - Switching Process In
+	(Interactive:6)/2/1243ms - Going to Sleep
+(Spawner:1):(Interactive:3)/10/1244ms - Switching Process In
+	(Spawner:1):(Interactive:3)/9/1254ms - Going to Sleep
+(Non-Interactive:4)/10/1255ms - Switching Process In
+	(Non-Interactive:4)/3/1325ms - Going to Sleep
+(Init:0)/10/1326ms - Switching Process In
+(Spawner:1)/10/1420ms - Switching Process In
+(Init:0)/10/1520ms - Switching Process In
+(Spawner:1)/10/1620ms - Switching Process In
+(Init:0)/10/1720ms - Switching Process In
+(Spawner:1)/10/1820ms - Switching Process In
+###-An Inerrupt has fired!-###
+	(Sleeper:5)/4/1822ms - Waking Up from Sleep
+	(Interactive:6)/2/1822ms - Waking Up from Sleep
+	(Spawner:1):(Interactive:3)/9/1822ms - Waking Up from Sleep
+	(Non-Interactive:4)/3/1822ms - Waking Up from Sleep
+(Interactive:6)/2/1823ms - Switching Process In
+(Non-Interactive:4)/3/1840ms - Switching Process In
+(Sleeper:5)/4/1870ms - Switching Process In
+(Spawner:1):(Interactive:3)/9/1910ms - Switching Process In
+	(Spawner:1):(Interactive:3)/7/1937ms - Going to Sleep
+(Spawner:1)/10/1938ms - Switching Process In
+(Init:0)/10/2030ms - Switching Process In
+(Interactive:6)/10/2130ms - Switching Process In
+	(Interactive:6)/8/2157ms - Going to Sleep
+(Non-Interactive:4)/10/2158ms - Switching Process In
+	(Non-Interactive:4)/9/2164ms - Going to Sleep
+(Sleeper:5)/10/2165ms - Switching Process In
+	(Sleeper:5)/1/2259ms - Going to Sleep
+(Spawner:1)/10/2260ms - Switching Process In
+(Init:0)/10/2360ms - Switching Process In
+(Spawner:1)/10/2460ms - Switching Process In
+###-An Inerrupt has fired!-###
+	(Spawner:1):(Interactive:3)/7/2485ms - Waking Up from Sleep
+	(Interactive:6)/8/2485ms - Waking Up from Sleep
+	(Non-Interactive:4)/9/2485ms - Waking Up from Sleep
+	(Sleeper:5)/1/2485ms - Waking Up from Sleep
+(Sleeper:5)/1/2486ms - Switching Process In
+(Spawner:1):(Interactive:3)/7/2490ms - Switching Process In
+	(Spawner:1):(Interactive:3)/6/2501ms - Going to Sleep
+(Spawner:1)/8/2502ms - Switching Process In
+(Interactive:6)/8/2580ms - Switching Process In
+	(Interactive:6)/2/2640ms - Going to Sleep
+(Non-Interactive:4)/9/2641ms - Switching Process In
+	(Non-Interactive:4)/8/2655ms - Going to Sleep
+(Init:0)/10/2656ms - Switching Process In
+(Sleeper:5)/10/2750ms - Switching Process In
+	(Sleeper:5)/4/2818ms - Going to Sleep
+(Spawner:1)/10/2819ms - Switching Process In
+(Init:0)/10/2910ms - Switching Process In
+(Spawner:1)/10/3010ms - Switching Process In
+(Init:0)/10/3110ms - Switching Process In
+###-An Inerrupt has fired!-###
+	(Spawner:1):(Interactive:3)/6/3183ms - Waking Up from Sleep
+	(Interactive:6)/2/3183ms - Waking Up from Sleep
+	(Non-Interactive:4)/8/3183ms - Waking Up from Sleep
+	(Sleeper:5)/4/3183ms - Waking Up from Sleep
+(Interactive:6)/2/3184ms - Switching Process In
+(Init:0)/3/3200ms - Switching Process In
+(Sleeper:5)/4/3230ms - Switching Process In
+	(Sleeper:5)/3/3243ms - Going to Sleep
+(Spawner:1):(Interactive:3)/6/3244ms - Switching Process In
+(Non-Interactive:4)/8/3300ms - Switching Process In
+	(Non-Interactive:4)/5/3332ms - Going to Sleep
+(Spawner:1)/10/3333ms - Switching Process In
+(Interactive:6)/10/3430ms - Switching Process In
+###-An Inerrupt has fired!-###
+	(Sleeper:5)/3/3507ms - Waking Up from Sleep
+	(Non-Interactive:4)/5/3507ms - Waking Up from Sleep
+	(Interactive:6)/2/3517ms - Going to Sleep
+(Sleeper:5)/3/3518ms - Switching Process In
+(Non-Interactive:4)/5/3540ms - Switching Process In
+(Init:0)/10/3590ms - Switching Process In
+(Spawner:1):(Interactive:3)/10/3690ms - Switching Process In
+	(Spawner:1):(Interactive:3)/1/3789ms - Going to Sleep
+(Spawner:1)/10/3790ms - Switching Process In
+(Sleeper:5)/10/3890ms - Switching Process In
+	(Sleeper:5)/1/3988ms - Going to Sleep
+(Non-Interactive:4)/10/3989ms - Switching Process In
+	(Non-Interactive:4)/6/4028ms - Going to Sleep
+(Init:0)/10/4029ms - Switching Process In
+(Spawner:1)/10/4120ms - Switching Process In
+###-An Inerrupt has fired!-###
+	(Interactive:6)/2/4177ms - Waking Up from Sleep
+	(Spawner:1):(Interactive:3)/1/4177ms - Waking Up from Sleep
+	(Sleeper:5)/1/4177ms - Waking Up from Sleep
+	(Non-Interactive:4)/6/4177ms - Waking Up from Sleep
+(Spawner:1):(Interactive:3)/1/4178ms - Switching Process In
+(Sleeper:5)/1/4180ms - Switching Process In
+(Interactive:6)/2/4190ms - Switching Process In
+	(Interactive:6)/1/4209ms - Going to Sleep
+(Spawner:1)/5/4210ms - Switching Process In
+(Non-Interactive:4)/6/4260ms - Switching Process In
+###-An Inerrupt has fired!-###
+	(Interactive:6)/1/4287ms - Waking Up from Sleep
+(Interactive:6)/1/4288ms - Switching Process In
+(Non-Interactive:4)/4/4290ms - Switching Process In
+(Init:0)/10/4330ms - Switching Process In
+(Spawner:1):(Interactive:3)/10/4430ms - Switching Process In
+	(Spawner:1):(Interactive:3)/6/4474ms - Going to Sleep
+(Sleeper:5)/10/4475ms - Switching Process In
+	(Sleeper:5)/7/4502ms - Going to Sleep
+(Spawner:1)/10/4503ms - Switching Process In
+###-An Inerrupt has fired!-###
+	(Spawner:1):(Interactive:3)/6/4543ms - Waking Up from Sleep
+	(Sleeper:5)/7/4543ms - Waking Up from Sleep
+(Spawner:1):(Interactive:3)/6/4600ms - Switching Process In
+(Sleeper:5)/7/4660ms - Switching Process In
+	(Sleeper:5)/3/4703ms - Going to Sleep
+(Interactive:6)/10/4704ms - Switching Process In
+	(Interactive:6)/6/4749ms - Going to Sleep
+(Non-Interactive:4)/10/4750ms - Switching Process In
+	(Non-Interactive:4)/4/4811ms - Going to Sleep
+(Init:0)/10/4812ms - Switching Process In
+(Spawner:1)/10/4910ms - Switching Process In
+(Spawner:1):(Interactive:3)/10/5010ms - Switching Process In
+	(Spawner:1):(Interactive:3)/2/5097ms - Going to Sleep
+(Init:0)/10/5098ms - Switching Process In
+(Spawner:1)/10/5190ms - Switching Process In
+(Init:0)/10/5290ms - Switching Process In
+###-An Inerrupt has fired!-###
+	(Sleeper:5)/3/5324ms - Waking Up from Sleep
+	(Interactive:6)/6/5324ms - Waking Up from Sleep
+	(Non-Interactive:4)/4/5324ms - Waking Up from Sleep
+	(Spawner:1):(Interactive:3)/2/5324ms - Waking Up from Sleep
+(Spawner:1):(Interactive:3)/2/5325ms - Switching Process In
+(Sleeper:5)/3/5340ms - Switching Process In
+(Non-Interactive:4)/4/5370ms - Switching Process In
+(Interactive:6)/6/5410ms - Switching Process In
+(Init:0)/7/5470ms - Switching Process In
+###-An Inerrupt has fired!-###
+(Spawner:1)/10/5540ms - Switching Process In
+(Spawner:1):(Interactive:3)/10/5640ms - Switching Process In
+	(Spawner:1):(Interactive:3)/7/5671ms - Going to Sleep
+(Sleeper:5)/10/5672ms - Switching Process In
+	(Sleeper:5)/1/5763ms - Going to Sleep
+(Non-Interactive:4)/10/5764ms - Switching Process In
+	(Non-Interactive:4)/5/5819ms - Going to Sleep
+(Interactive:6)/10/5820ms - Switching Process In
+	(Interactive:6)/4/5881ms - Going to Sleep
+(Init:0)/10/5882ms - Switching Process In
+(Spawner:1)/10/5980ms - Switching Process In
+(Init:0)/10/6080ms - Switching Process In
+(Spawner:1)/10/6180ms - Switching Process In
+###-An Inerrupt has fired!-###
+	(Spawner:1):(Interactive:3)/7/6237ms - Waking Up from Sleep
+	(Sleeper:5)/1/6237ms - Waking Up from Sleep
+	(Non-Interactive:4)/5/6237ms - Waking Up from Sleep
+	(Interactive:6)/4/6237ms - Waking Up from Sleep
+(Sleeper:5)/1/6238ms - Switching Process In
+(Interactive:6)/4/6240ms - Switching Process In
+(Spawner:1)/5/6280ms - Switching Process In
+(Non-Interactive:4)/5/6330ms - Switching Process In
+	(Non-Interactive:4)/4/6344ms - Going to Sleep
+(Spawner:1):(Interactive:3)/7/6345ms - Switching Process In
+	(Spawner:1):(Interactive:3)/6/6356ms - Going to Sleep
+(Init:0)/10/6357ms - Switching Process In
+(Sleeper:5)/10/6450ms - Switching Process In
+	(Sleeper:5)/9/6462ms - Going to Sleep
+(Interactive:6)/10/6463ms - Switching Process In
+	(Interactive:6)/4/6520ms - Going to Sleep
+(Spawner:1)/10/6521ms - Switching Process In
+(Init:0)/10/6620ms - Switching Process In
+(Spawner:1)/10/6720ms - Switching Process In
+(Init:0)/10/6820ms - Switching Process In
+(Spawner:1)/10/6920ms - Switching Process In
+###-An Inerrupt has fired!-###
+	(Non-Interactive:4)/4/6967ms - Waking Up from Sleep
+	(Spawner:1):(Interactive:3)/6/6967ms - Waking Up from Sleep
+	(Sleeper:5)/9/6967ms - Waking Up from Sleep
+	(Interactive:6)/4/6967ms - Waking Up from Sleep
+(Non-Interactive:4)/4/6968ms - Switching Process In
+(Interactive:6)/4/7000ms - Switching Process In
+	(Interactive:6)/3/7013ms - Going to Sleep
+(Spawner:1)/6/7014ms - Switching Process In
+(Spawner:1):(Interactive:3)/6/7070ms - Switching Process In
+(Sleeper:5)/9/7130ms - Switching Process In
+	(Sleeper:5)/8/7140ms - Going to Sleep
+(Init:0)/10/7141ms - Switching Process In
+(Non-Interactive:4)/10/7240ms - Switching Process In
+###-An Inerrupt has fired!-###
+	(Interactive:6)/3/7297ms - Waking Up from Sleep
+	(Sleeper:5)/8/7297ms - Waking Up from Sleep
+(Interactive:6)/3/7298ms - Switching Process In
+(Non-Interactive:4)/5/7320ms - Switching Process In
+	(Non-Interactive:4)/2/7354ms - Going to Sleep
+(Sleeper:5)/8/7355ms - Switching Process In
+	(Sleeper:5)/5/7386ms - Going to Sleep
+(Spawner:1)/10/7387ms - Switching Process In
+(Spawner:1):(Interactive:3)/10/7480ms - Switching Process In
+	(Spawner:1):(Interactive:3)/2/7563ms - Going to Sleep
+(Init:0)/10/7564ms - Switching Process In
+(Interactive:6)/10/7660ms - Switching Process In
+	(Interactive:6)/8/7688ms - Going to Sleep
+(Spawner:1)/10/7689ms - Switching Process In
+(Init:0)/10/7780ms - Switching Process In
+(Spawner:1)/10/7880ms - Switching Process In
+###-An Inerrupt has fired!-###
+	(Non-Interactive:4)/2/7881ms - Waking Up from Sleep
+	(Sleeper:5)/5/7881ms - Waking Up from Sleep
+	(Spawner:1):(Interactive:3)/2/7881ms - Waking Up from Sleep
+	(Interactive:6)/8/7881ms - Waking Up from Sleep
+(Non-Interactive:4)/2/7882ms - Switching Process In
+	(Non-Interactive:4)/2/7886ms - Going to Sleep
+(Spawner:1):(Interactive:3)/2/7887ms - Switching Process In
+(Sleeper:5)/5/7900ms - Switching Process In
+(Interactive:6)/8/7950ms - Switching Process In
+(Spawner:1)/10/8029ms - Switching Process In
+(Init:0)/10/8130ms - Switching Process In
+(Spawner:1):(Interactive:3)/10/8230ms - Switching Process In
+	(Spawner:1):(Interactive:3)/5/8281ms - Going to Sleep
+(Sleeper:5)/10/8282ms - Switching Process In
+	(Sleeper:5)/6/8323ms - Going to Sleep
+(Interactive:6)/10/8324ms - Switching Process In
+	(Interactive:6)/3/8393ms - Going to Sleep
+(Spawner:1)/10/8394ms - Switching Process In
+(Init:0)/10/8490ms - Switching Process In
+(Spawner:1)/10/8590ms - Switching Process In
+(Init:0)/10/8690ms - Switching Process In
+(Spawner:1)/10/8790ms - Switching Process In
+###-An Inerrupt has fired!-###
+	(Non-Interactive:4)/2/8869ms - Waking Up from Sleep
+	(Spawner:1):(Interactive:3)/5/8869ms - Waking Up from Sleep
+	(Sleeper:5)/6/8869ms - Waking Up from Sleep
+	(Interactive:6)/3/8869ms - Waking Up from Sleep
+(Non-Interactive:4)/2/8890ms - Switching Process In
+(Interactive:6)/3/8910ms - Switching Process In
+(Spawner:1):(Interactive:3)/5/8940ms - Switching Process In
+	(Spawner:1):(Interactive:3)/1/8986ms - Going to Sleep
+(Sleeper:5)/6/8987ms - Switching Process In
+(Init:0)/10/9040ms - Switching Process In
+###-An Inerrupt has fired!-###
+	(Spawner:1):(Interactive:3)/1/9078ms - Waking Up from Sleep
+(Spawner:1):(Interactive:3)/1/9079ms - Switching Process In
+(Init:0)/7/9080ms - Switching Process In
+(Spawner:1)/10/9150ms - Switching Process In
+###-An Inerrupt has fired!-###
+(Non-Interactive:4)/10/9250ms - Switching Process In
+	(Non-Interactive:4)/2/9337ms - Going to Sleep
+(Interactive:6)/10/9338ms - Switching Process In
+	(Interactive:6)/1/9422ms - Going to Sleep
+(Sleeper:5)/10/9423ms - Switching Process In
+	(Sleeper:5)/4/9481ms - Going to Sleep
+(Spawner:1):(Interactive:3)/10/9482ms - Switching Process In
+	(Spawner:1):(Interactive:3)/5/9535ms - Going to Sleep
+(Init:0)/10/9536ms - Switching Process In
+(Spawner:1)/10/9630ms - Switching Process In
+###-An Inerrupt has fired!-###
+	(Non-Interactive:4)/2/9722ms - Waking Up from Sleep
+	(Interactive:6)/1/9722ms - Waking Up from Sleep
+	(Sleeper:5)/4/9722ms - Waking Up from Sleep
+	(Spawner:1):(Interactive:3)/5/9722ms - Waking Up from Sleep
+(Interactive:6)/1/9730ms - Switching Process In
+(Non-Interactive:4)/2/9740ms - Switching Process In
+(Sleeper:5)/4/9760ms - Switching Process In
+(Spawner:1):(Interactive:3)/5/9800ms - Switching Process In
+(Init:0)/10/9850ms - Switching Process In
+(Spawner:1)/10/9950ms - Switching Process In
+###-Sending Kill Message-###
+(Interactive:6)/10/10050ms - Switching Process In
+###-Process: (Interactive:6) is going down-###
+(Non-Interactive:4)/10/10050ms - Switching Process In
+###-Process: (Non-Interactive:4) is going down-###
+(Sleeper:5)/10/10050ms - Switching Process In
+###-Process: (Sleeper:5) is going down-###
+(Spawner:1):(Interactive:3)/10/10050ms - Switching Process In
+###-Process: (Spawner:1):(Interactive:3) is going down-###
+(Init:0)/10/10050ms - Switching Process In
+(Spawner:1)/10/10150ms - Switching Process In
+###-Process: (Spawner:1) is going down-###
+(Init:0)/10/10150ms - Switching Process In
+###-Process: (Init:0) is going down-###
+###-Shutting Down CPU-###
