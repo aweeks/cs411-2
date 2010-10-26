@@ -1,7 +1,8 @@
 /*
  *  Project 2
  *    A shortest job remaining scheduler.
- *  
+ *
+ *  Team 3  
  *  Authors:
  *    Alex Weeks
  *    Josh Jordahl
